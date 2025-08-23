@@ -270,7 +270,7 @@ fun_download_file(){
         rm -fr ${program_latest_filename} frp_${FRPS_VER}_linux_${ARCHS}
 	echo -e "下载 ${program_name}..."
 	echo ""
-        curl -L --progress-bar "${program_latest_file_url}" -o "${program_latest_filename}" 2>&1 | show_progress
+        curl -L --progress-bar "${program_latest_file_url}" -o "${program_latest_filename}"
 	echo ""		
 	if [ $? -ne 0 ]; then
         echo -e " ${COLOR_RED}下载失败${COLOR_END}"
