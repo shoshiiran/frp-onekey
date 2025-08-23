@@ -265,18 +265,20 @@ fun_getVer(){
     fi
 }
 fun_download_file(){
-    # 下载
-    if [ ! -s ${str_program_dir}/${program_name} ]; then
-        rm -fr ${program_latest_filename} frp_${FRPS_VER}_linux_${ARCHS}
-	echo -e "下载 ${program_name}..."
-	echo ""
-        curl -L --progress-bar "${program_latest_file_url}" -o "${program_latest_filename}"
-	echo ""		
-	if [ $? -ne 0 ]; then
-        echo -e " ${COLOR_RED}下载失败${COLOR_END}"
-	exit 1
-    fi
-	
+	if [ ! -s ${str_program_dir}/${program_name} ]; then
+		echo "检测到本地文件，正在从 /root/ 目录拷贝..."
+     
+         # 从 /root/ 目录拷贝文件到当前目录
+        cp "/root/${program_latest_filename}" .
+     
+         # 检查文件是否成功拷贝过来
+         if [ ! -s "${program_latest_filename}" ]; then
+           echo -e " ${COLOR_RED}错误：无法从 /root/ 拷贝文件。${COLOR_END}"
+           echo -e " ${COLOR_RED}请确认您上传的文件名与脚本期望的文件名完全一致！${COLOR_END}"
+          echo -e " ${COLOR_YELOW}脚本期望的文件名是: ${program_latest_filename}${COLOR_END}"
+          exit 1
+        fi
+
     # 验证下载的文件是否存在且不为空
     if [ ! -s ${program_latest_filename} ]; then
       echo -e " ${COLOR_RED}下载的文件失败或未找到${COLOR_END}"
