@@ -738,7 +738,7 @@ quicBindPort = ${set_quic_bind_port}
 
 # Heartbeat configure, it's not recommended to modify the default value
 # The default value of heartbeatTimeout is 90. Set negative value to disable it.
-transport.heartbeatTimeout = 390
+transport.heartbeatTimeout = -1
 
 # Pool count in each proxy will keep no more than maxPoolCount.
 transport.maxPoolCount = ${set_max_pool_count}
